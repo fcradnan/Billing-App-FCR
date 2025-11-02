@@ -1,0 +1,20 @@
+<%= form_with model: [:admin, @usage], local: true do |f| %>
+  <div>
+    <%= f.label :buyer_id, "Buyer" %>
+    <%= f.collection_select :buyer_id, @buyers, :id, :name, prompt: "Select a buyer" %>
+  </div>
+
+  <div>
+    <%= f.label :feature_id, "Feature" %>
+    <%= f.collection_select :feature_id, @features, :id, :name, prompt: "Select a feature" %>
+  </div>
+
+  <div>
+    <%= f.label :units_used, "Units Used" %>
+    <%= f.number_field :units_used %>
+  </div>
+
+  <div>
+    <%= f.submit "Add Usage" %>
+  </div>
+<% end %>

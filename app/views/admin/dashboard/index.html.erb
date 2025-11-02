@@ -1,0 +1,17 @@
+<h1>Admin Dashboard</h1>
+
+<p>Total Buyers: <%= @total_buyers %></p>
+<p>Total Plans: <%= @total_plans %></p>
+<p>Total Revenue: <%= @total_revenue %> PKR</p>
+<p>Active Subscriptions: <%= @active_subscriptions %></p>
+
+<hr>
+<%= button_to "Run Billing Cycle", admin_run_billing_path, method:  :post %>
+<div class="profile-link mb-3">
+  <%= link_to "Edit Profile", edit_admin_profile_path, class: "btn btn-outline-primary" %>
+</div>
+<hr>
+<%= link_to "Manage Plans", admin_plans_path %> |
+<%= link_to "Manage Features", admin_features_path %> |
+<%= link_to "Add Usage", new_admin_usage_path %>
+

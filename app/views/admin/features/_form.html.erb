@@ -1,0 +1,25 @@
+<%= form_with(model: [:admin, @feature]) do |f| %>
+  <p>
+    <strong>Name:</strong>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <strong>Code:</strong>
+    <%= f.text_field :code %>
+  </p>
+
+  <p>
+    <strong>Unit Price:</strong>
+    <%= f.number_field :unit_price %>
+  </p>
+
+  <p>
+    <strong>Max Limit:</strong>
+    <%= f.number_field :max_unit_limit %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

@@ -1,0 +1,17 @@
+<%= form_with(model: [:admin, @plan]) do |f| %>
+  <p>
+    <strong>Name:</strong>
+    <%= f.text_field :name %>
+  </p>
+  
+  <p>
+    <strong>Monthly Fee:</strong>
+    <%= f.number_field :monthly_fee %>
+  </p>
+  
+  
+  
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

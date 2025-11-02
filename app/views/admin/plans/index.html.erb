@@ -1,0 +1,29 @@
+<h1>All Plans</h1>
+
+<%= link_to "New Plan", new_admin_plan_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Monthly Fee</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @plans.each do |plan| %>
+      <tr>
+        <td><%= link_to plan.name, admin_plan_path(plan) %></td>
+
+        <td><%= number_to_currency(plan.monthly_fee) %></td>
+        <td>
+          <%= link_to "Edit", edit_admin_plan_path(plan) %> |
+          <%= link_to "Delete", admin_plan_path(plan), method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to "Back to Dashboard", admin_dashboard_path %>

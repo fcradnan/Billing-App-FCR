@@ -1,0 +1,32 @@
+<h1>All Features</h1>
+
+<%= link_to "New Feature", new_admin_feature_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Code</th>
+      <th>Price/unit</th>
+      <th>Limit</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @features.each do |f| %>
+      <tr>
+        <td><%= f.name %></td>
+        <td><%= f.code %></td>
+        <td><%= f.unit_price %></td>
+        <td><%= f.max_unit_limit %></td>
+        <td>
+          <%= link_to "Edit", edit_admin_feature_path(f) %> |
+          <%= button_to "Delete", admin_feature_path(f), method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Back to Dashboard", admin_dashboard_path %>

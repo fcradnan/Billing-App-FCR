@@ -1,0 +1,26 @@
+<h1>📊 Usage Report</h1>
+
+<% if @usages.present? %>
+  <table >
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Units Used</th>
+        <th>Usage Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @usages.each do |usage| %>
+        <tr>
+          <td><%= usage.feature.name %></td>
+          <td><%= usage.units_used %></td>
+          <td><%= usage.usage_date %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No usage records found.</p>
+<% end %>
+
+<%= link_to "⬅ Back to Dashboard", buyer_dashboard_path %>

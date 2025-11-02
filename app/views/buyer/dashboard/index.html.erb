@@ -1,0 +1,64 @@
+<h1>Buyer Dashboard</h1>
+
+<section class="subscriptions">
+  <h3>Your Subscriptions</h3>
+
+  <% if @subscriptions.any? %>
+    <ul>
+      <% @subscriptions.each do |sub| %>
+        <li>
+          <strong>Plan:</strong> <%= sub.plan.name %> |
+          <strong>Status:</strong> <%= sub.status %> |
+          <strong>Started:</strong> <%= sub.start_date %>
+
+          <% if sub.active? %>
+            <%= button_to "Cancel", cancel_subscription_path(sub), method: :post, class: "btn btn-danger btn-sm" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No active subscriptions.</p>
+  <% end %>
+</section>
+
+<hr>
+
+<section class="transactions">
+  <h3>Your Transactions</h3>
+
+  <% if @transactions.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @transactions.each do |t| %>
+          <tr>
+            <td><%= t.transaction_type %></td>
+            <td><%= number_to_currency(t.amount) %></td>
+            <td><%= t.transaction_date %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No transactions found.</p>
+  <% end %>
+</section>
+
+<hr>
+
+<nav class="dashboard-links">
+  <%= link_to "Subscribe to New Plan", new_subscription_path, class: "btn btn-primary" %> |
+  <%= link_to "View Usage Report", usage_report_path, class: "btn btn-secondary" %> |
+  <%= link_to "View Transactions", transactions_path, class: "btn btn-secondary" %>
+
+<div class="profile-link mb-3">
+  <%= link_to "Edit Profile", edit_admin_profile_path, class: "btn btn-outline-primary" %>
+</div>
+</nav>

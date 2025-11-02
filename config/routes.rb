@@ -1,0 +1,33 @@
+Rails.application.routes.draw do
+  devise_for :users, controllers: {
+            registrations: "users/registrations",
+          }
+
+  scope module: "buyer" do
+    get "dashboard", to: "dashboard#index", as: "buyer_dashboard"
+    resource :profile, only: [:show, :edit, :update]
+    resources :subscriptions, only: [:new, :create] do
+      member do
+        post "cancel"
+      end
+    end
+
+    get "usage_report", to: "usage#index"
+    resources :transactions, only: [:index]
+  end
+
+  namespace :admin do
+    get "dashboard", to: "dashboard#index"
+
+    resources :features
+    resources :plans do
+      resources :plan_features, only: [:create, :destroy]
+    end
+
+    resources :plan_features, only: [:create, :destroy]
+    resources :usages, only: [:new, :create]
+    resource :profile, only: [:show, :edit, :update]
+
+    post "billing/run", to: "billing#run", as: "run_billing"
+  end
+end

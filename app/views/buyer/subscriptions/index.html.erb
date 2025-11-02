@@ -1,0 +1,39 @@
+<h1>Your Subscriptions</h1>
+
+<table >
+  <thead>
+    <tr>
+      <th>Plan Name</th>
+      <th>Status</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @subscriptions = current_user.subscriptions.includes(:plan) %>
+    <% @subscriptions.each do |subscription| %>
+      <tr>
+        <td><%= subscription.plan.name %></td>
+        <td><%= subscription.status %></td>
+        <td><%= subscription.start_date %></td>
+        <td><%= subscription.end_date || "Active" %></td>
+        <td>
+          <% if subscription.active? %>
+            <%= button_to "Cancel", cancel_subscription_path(subscription), method: :post, class: "btn btn-danger btn-sm" %>
+          <% else %>
+            <span style="color: gray;">Cancelled</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr>
+
+<div class="subscription-links">
+  <%= link_to "Subscribe to New Plan", new_subscription_path, class: "btn btn-primary" %> |
+  <%= link_to "Back to Dashboard", buyer_dashboard_path, class: "btn btn-secondary" %>
+</div>

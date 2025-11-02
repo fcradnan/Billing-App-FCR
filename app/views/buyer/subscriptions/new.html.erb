@@ -1,0 +1,30 @@
+<h1>Available Plans</h1>
+
+<% if @plans.any? %>
+  <% @plans.each do |plan| %>
+    <div class="card mb-3 p-3">
+      <h4><%= plan.name %> - <%= number_to_currency(plan.monthly_fee) %>/month</h4>
+
+      <% if plan.features.any? %>
+        <ul>
+          <% plan.features.each do |feature| %>
+            <li>
+              <strong><%= feature.name %></strong> —
+              Limit: <%= feature.max_unit_limit %> units
+              (<%= number_to_currency(feature.unit_price) %>/unit if exceeded)
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No features defined for this plan.</p>
+      <% end %>
+
+      <%= form_with url: subscriptions_path, method: :post, local: true do |f| %>
+        <%= hidden_field_tag :plan_id, plan.id %>
+        <%= f.submit "Subscribe", class: "btn btn-success mt-2" %>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <p>No plans available at this time.</p>
+<% end %>
